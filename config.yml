@@ -1,0 +1,312 @@
+groups:
+  guest:
+# There must be one default
+    default: true
+    prefix: '&f[&7Guest&f]&7'
+    permissions:
+    - bukkit.command.list
+    - essentials.balance
+    - essentials.delhome
+    - essentials.exp
+    - essentials.help
+    - essentials.helpop
+    - essentials.home
+    - essentials.ignore
+    - essentials.info
+# essentials.kit gives them access to the /kit command
+    - essentials.kit
+# essentials.kits.guest gives them access to /kit guest (sign or typed command)
+    - essentials.kits.guest
+    - essentials.list
+    - essentials.mail
+    - essentials.mail.send
+    - essentials.me
+    - essentials.msg
+    - essentials.pay
+    - essentials.protect.pvp
+    - essentials.realname
+    - essentials.recipe
+    - essentials.sell
+    - essentials.sethome
+    - essentials.signs.use.buy
+    - essentials.signs.use.info
+    - essentials.signs.use.warp
+    - -essentials.socialspy
+    - essentials.spawn
+    - essentials.tpa
+    - essentials.tpaccept
+    - essentials.tpahere
+    - essentials.tpdeny
+    - essentials.warp
+    - essentials.warp.list
+    - essentials.worth
+    - modifyworld.*
+    - nocheatplus.checks.blockplace.boatsanywhere
+    options:
+# Weight controls which prefix is used if the user is in multiple groups
+#   The higher the weight, the LOWER it sinks. The prefix in the group with
+#   the lowest weight RISES to the top and becomes the prefix displayed in chat!
+      weight: '900'
+# Rank controls promotions and demotions. It works similar to weight in that the
+#   higher the number, the LEAST priveleges the group has.
+      rank: '900'
+#
+#
+  member:
+# Instead of repeating all the permissions in each group, use inheritiance to
+#   automatically include the permissions from other groups.
+    inheritance:
+    - guest
+    prefix: '&f[&eMember&F]&7'
+    permissions:
+    - essentials.afk
+    - essentials.back
+    - essentials.chat.color
+    - essentials.compass
+    - essentials.ext
+    - essentials.hat
+    - essentials.jump
+    - essentials.kit
+    - essentials.kits.member
+    - essentials.msg.color
+    - essentials.sethome.multiple.member
+    - essentials.time
+    - essentials.workbench
+    options:
+      weight: '700'
+      rank: '700'
+  citizen:
+    prefix: '&f[&6Citizen&f]&7'
+    inheritance:
+    - member
+    permissions:
+    - essentials.keepxp
+    - essentials.kits.member
+    - essentials.kits.citizen
+    - essentials.sethome.multiple.citizen
+    options:
+      weight: '600'
+      rank: '600'
+  moderator:
+    prefix: '&7[&bMod&7]&f'
+    inheritance:
+    - member
+    permissions:
+    - bukkit.command.banlist
+    - bukkit.command.ban.list
+    - essentials.ban.notify
+    - essentials.chat.ignoreexempt
+    - essentials.exp.others
+    - essentials.fly
+    - essentials.fly.safelogin
+    - essentials.gc
+    - essentials.helpop.receive
+    - essentials.invsee
+# Moderators should not have the ability to modify the inventory of others.
+#   Trust me on this, as they WILL abuse the power.
+    - -essentials.invsee.preventmodify
+    - essentials.jail
+# Moderators should not be exempt from being jailed
+    - -essentials.jail.exempt
+    - essentials.jails
+    - essentials.jump
+    - essentials.kick
+    - essentials.kick.notify
+# Moderators should not be able to /kill others
+    - -essentials.kill
+    - essentials.mute
+    - essentials.mute.notify
+    - essentials.repair
+    - essentials.repair.all
+    - essentials.repair.armor
+    - essentials.repair.enchanted
+    - essentials.socialspy
+    - essentials.tempban
+    - -essentials.tempban.offline
+    - essentials.togglejail
+    - essentials.tpahere
+# The /whois command will show someone's IP address. Moderators don't need to know
+#   that information, as it could be used to DDOS someone
+    - -essentials.whois
+    - -vanish.*
+    options:
+      weight: '500'
+      rank: '500'
+  elite:
+    prefix: '&7[&4Elite&7]&7'
+    inheritance:
+    - citizen
+    permissions:
+    - essentials.fly
+    - essentials.fly.safelogin
+    - essentials.kits.elite
+    - essentials.nick
+    - essentials.repair
+    - essentials.repair.all
+    - essentials.repair.armor
+    - essentials.repair.enchanted
+    - essentials.sethome.multiple.unlimited
+# The /spawnmob command is limited in the Essentials config to 1 mob at a time,
+#   and ChatControl will prevent the player from repeating the same command twice
+    - essentials.spawnmob.*
+    options:
+      weight: '300'
+      rank: '300'
+  admin:
+    prefix: '&2[&4Admin&2]&7'
+    inheritance:
+    - elite
+    - moderator
+    permissions:
+# These are NEGATED permissions (the extra - in front)
+#   That means they CANNOT use these commands. You really
+#   DO NOT want admins to use op, deop, give, take, etc. as someone
+#   will eventually op another player you do not want opped, and they WILL grief.
+    - -bukkit.command.deop
+    - -bukkit.command.give
+    - -bukkit.command.op
+    - -bukkit.command.plugins
+    - -bukkit.command.take
+    - bukkit.command.toggledownfall
+    - essentials.balance.others
+    - essentials.balancetop
+    - essentials.ban
+    - -essentials.ban.offline
+    - essentials.broadcast
+    - essentials.burn
+    - essentials.clearinventory
+    - essentials.delhome.others
+    - -essentials.deop
+# Enchant is also a BAD idea, as they will just enchant "god" gear and give it away.
+    - -essentials.enchant
+    - essentials.exp.give
+    - essentials.exp.give.others
+    - essentials.exp.set
+    - essentials.exp.set.others
+    - essentials.ext
+    - essentials.feed
+# You don't want admins changing the game mode of others either, they WILL grief
+    - -essentials.gamemode
+    - -essentials.gamemode.creative
+    - -essentials.gamemode.others
+    - -essentials.give
+    - essentials.heal
+    - -essentials.home.others
+    - essentials.invsee.modify
+    - essentials.invsee.preventmodify
+    - -essentials.item
+    - essentials.jail.exempt
+    - essentials.joinfullserver
+    - essentials.kill
+    - essentials.list.hidden
+    - essentials.mute.exempt
+    - essentials.mute.notify
+    - essentials.nick
+    - essentials.nick.color
+    - essentials.nick.others
+    - -essentials.op
+    - essentials.seen
+    - essentials.seen.banreason
+    - -essentials.sethome.others
+    - -essentials.setworth
+    - essentials.socialspy
+    - essentials.unban
+    - essentials.vanish
+    - essentials.vanish.see
+    - essentials.warp.otherplayers
+    - essentials.weather
+    - -permissions.*
+    options:
+      weight: '200'
+      rank: '200'
+# Co-owner has most of the admin and higher commands, only a few are saved for Owner only
+  coowner:
+    prefix: '&l&f[&cCo-Owner&l&f]'
+    inheritance:
+    - admin
+    permissions:
+    - automessage.*
+    - bukkit.command.effect
+    - essentials.ban.exempt
+    - essentials.ban.offline
+    - essentials.broadcast
+    - essentials.clearinventory.others
+    - essentials.delwarp
+    - essentials.eco
+    - essentials.enderchest
+    - essentials.enderchest.others
+    - essentials.feed.others
+    - essentials.gamemode
+    - essentials.gamemode.creative
+    - essentials.god
+    - essentials.heal.others
+    - essentials.home.others
+    - essentials.item
+    - essentials.kick.exempt
+    - essentials.killall
+    - essentials.kit.exemptdelay
+    - essentials.kit.others
+    - essentials.kits.*
+    - essentials.lightning
+    - essentials.nick.*
+    - essentials.powertool
+    - essentials.sethome.others
+    - essentials.setwarp
+    - essentials.teleport.cooldown.bypass
+    - essentials.tp
+    - essentials.tpo
+    - essentials.tpohere
+    - essentials.tp.others
+    - essentials.vanish
+    - essentials.vanish.see
+    - essentials.warp.overwrite.*
+    - essentials.whois
+    - worldedit.butcher
+    options:
+      weight: '100'
+      rank: '100'
+  owner:
+    inheritance:
+    - coowner
+    permissions:
+    - autodeop.reload
+    - bukkit.command.plugins
+    - bukkit.command.reload
+    - bukkit.command.restart
+    - bukkit.command.restart
+    - bukkit.commands.timings
+    - bukkit.command.timings
+    - bukkit.command.tps
+    - bukkit.command.version
+    - cm.set
+# Make sure owner doesn't have separate creative mode/survival mode inventories
+    - creativeControl.blacklist.*
+    - creativeControl.data.status
+    - creativeControl.preventions.*
+    - essentials.command.plugins
+    - essentials.enchant
+    - essentials.enchantments.*
+    - essentials.enderchest.modify
+    - essentials.essentials
+    - essentials.fireball
+    - essentials.fly.others
+    - essentials.gamemode.others
+    - essentials.heal.cooldown.bypass
+    - essentials.plugins
+    - essentials.signs.*
+    - essentials.spawnmob.*
+    - essentials.spawnmob.stack
+    - essentials.speed
+    - essentials.speed.bypass
+    - essentials.speed.others
+    - essentials.time.set
+    - essentials.vanish.*
+    - permissions.*
+    - vanish.*
+    - worldedit.*
+    - worldguard.*
+    prefix: '&l&6[&4Owner&6]'
+    suffix: '&c'
+    options:
+      weight: '1'
+      rank: '1'
